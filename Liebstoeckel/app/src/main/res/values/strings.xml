@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Liebstoeckel</string>
+    <string name="title_home">Today</string>
+    <string name="title_menu">Speiseplan</string>
+    <string name="title_contact">Contact</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="week">Woche</string>
+</resources>

@@ -1,0 +1,60 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="de.tdsoftware.liebstoeckel.fragments.ContactFragment"
+    android:id="@+id/fragment_contact"
+    >
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lutherplatz 3 \n07743 Jena, Thüringen"
+            android:textSize="14dp"
+            android:layout_marginTop="12dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/textView_email" />
+
+        <TextView
+            android:id="@+id/textView_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telefon: 03641-3166966"
+            android:textSize="14dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="11dp"
+            android:layout_below="@+id/textView_email"
+            android:layout_alignParentStart="true"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/textView_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="info@liebstoeckel-tagesbar.de"
+            android:textSize="14dp"
+            android:layout_below="@+id/textView_address"
+            android:layout_alignStart="@+id/textView_phone"
+            android:layout_marginTop="12dp"
+            android:textStyle="bold"
+            />
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView_phone"
+            android:layout_marginTop="18dp" />
+
+    </RelativeLayout>
+
+</FrameLayout>
