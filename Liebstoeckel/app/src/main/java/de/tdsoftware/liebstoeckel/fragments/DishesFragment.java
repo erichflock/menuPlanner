@@ -7,8 +7,15 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.tdsoftware.liebstoeckel.R;
+import de.tdsoftware.liebstoeckel.adapter.DishesAdapter;
+import de.tdsoftware.liebstoeckel.model.Dish;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +36,9 @@ public class DishesFragment extends android.support.v4.app.Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private ListView listViewDishes;
+    private View view;
 
     public DishesFragment() {
         // Required empty public constructor
@@ -64,8 +74,12 @@ public class DishesFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        view = inflater.inflate(R.layout.fragment_dishes, container, false);
+        listViewDishes = (ListView) view.findViewById(R.id.listView_dishes);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dishes, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,5 +119,57 @@ public class DishesFragment extends android.support.v4.app.Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+
+        /*
+        The inflation of the dishes list will be set here
+         */
+
+        /*
+        At this step, the day's dishes should be known.
+         */
+
+        /*
+        Fake dishes created in order to test the adpater
+         */
+
+        List<Dish> dishes = new ArrayList<>();
+
+        /*
+        Create and add the dishes to the list
+         */
+        Dish dish1 = new Dish("TAGESGERICHT FLEISCH/ FISCH", "Wolfsbarschfilet, dazu Quitten-Ingwer-Chutney, Kartoffel-Möhren-Püree, Spinat", "6,90€");
+        Dish dish2 = new Dish("TAGESGERICHT VEGETARISCH / FISCH", "Frischer Blumenkohl mit Zucchini, Kartoffelstampf und Sauce Hollandaise", "6,90€");
+        Dish dish3 = new Dish("TAGESSUPPE", "Linseneintopf mit rote Bete, Orange, Zucchini und Möhre", "3,90€");
+        dishes.add(dish1);
+        dishes.add(dish2);
+        dishes.add(dish3);
+
+        DishesAdapter dishesAdapter = new DishesAdapter(this.getContext(), dishes);
+
+        //ArrayAdapter<Dish> adapter = new ArrayAdapter<Dish>(this.getContext(), R.layout.support_simple_spinner_dropdown_item, dishes);
+
+        listViewDishes.setAdapter(dishesAdapter);
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 }

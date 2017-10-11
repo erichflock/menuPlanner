@@ -3,7 +3,7 @@
     android:layout_width="match_parent" android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textView_weekDay"
+        android:id="@+id/textView_menu_weekDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tag"
@@ -29,8 +29,9 @@
         android:layout_height="wrap_content"
         android:text="Von 07:30 bis 17:00 Uhr"
 
-        android:layout_alignBottom="@+id/textView_weekDay"
+        android:layout_alignBaseline="@+id/textView_menu_weekDay"
+        android:layout_alignBottom="@+id/textView_menu_weekDay"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp" />
+        android:layout_marginEnd="11dp" />
 
 </RelativeLayout>
