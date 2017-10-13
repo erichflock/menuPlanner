@@ -1,14 +1,23 @@
 package de.tdsoftware.liebstoeckel.fragments;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.tdsoftware.liebstoeckel.R;
+import de.tdsoftware.liebstoeckel.adapter.DayAdapter;
+import de.tdsoftware.liebstoeckel.model.Day;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +27,7 @@ import de.tdsoftware.liebstoeckel.R;
  * Use the {@link MenuFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MenuFragment extends android.support.v4.app.Fragment {
+public class MenuFragment extends android.support.v4.app.Fragment implements DishesFragment.OnFragmentInteractionListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,6 +38,15 @@ public class MenuFragment extends android.support.v4.app.Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private View view;
+    private ListView listViewWeekDays;
+
+    /*
+    Variables used in order to be able to change fragments
+     */
+
+    private FragmentManager fragmentManager;
+    private FragmentTransaction transaction;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -64,8 +82,13 @@ public class MenuFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        view = inflater.inflate(R.layout.fragment_menu, container, false);
+
+        listViewWeekDays = (ListView) view.findViewById(R.id.listView_weekDay);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -92,6 +115,11 @@ public class MenuFragment extends android.support.v4.app.Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -105,5 +133,78 @@ public class MenuFragment extends android.support.v4.app.Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        /*
+        Create the days and then add them to the list that will be sent to the adapter
+         */
+
+        /*
+        Parameters: Day (String), Opening Hours (String), Date (Date), Dishes (List<Dish - usually 3 dishes)
+         */
+
+        String date = "16.10.17";
+        Day monday = new Day("Montag", "VON 07:30Uhr BIS 17:00Uhr", date, null);
+        date = "17.10.17";
+        Day tuesday = new Day("Dienstag", "VON 07:30Uhr BIS 17:00Uhr", date, null);
+         date = "18.10.17";
+        Day wednesday = new Day("Mittwoch", "VON 07:30Uhr BIS 17:00Uhr", date, null);
+        date = "19.10.17";
+        Day thursday = new Day("Donnerstag", "VON 07:30Uhr BIS 17:00Uhr", date, null);
+        date = "20.10.17";
+        Day friday = new Day("Freitag", "VON 07:30Uhr BIS 17:00Uhr", date, null);
+        date = "21.10.17";
+        Day saturday = new Day("Samstag", "       Geschlossen       ", date, null);
+        date = "22.10.17";
+        Day sunday = new Day("Sontag", "       Geschlossen       ", date, null);
+        List<Day> daysList = new ArrayList<>();
+        daysList.add(monday);
+        daysList.add(tuesday);
+        daysList.add(wednesday);
+        daysList.add(thursday);
+        daysList.add(friday);
+        daysList.add(saturday);
+        daysList.add(sunday);
+
+        DayAdapter dayAdapter = new DayAdapter(this.getContext(), daysList);
+        listViewWeekDays.setAdapter(dayAdapter);
+
+        /*
+        After loading the content of the ListView, let's create a listener.
+        When the user selects one weekday, the fragment dishes is opened displaying the dishes of the selected day.
+         */
+
+        listViewWeekDays.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> list, View view, int position, long id) {
+                /*
+                At this point, it's important to send the day object to the dishes fragment.
+                 */
+                Day selectedDay = (Day) list.getItemAtPosition(position);
+                fragmentManager = getActivity().getSupportFragmentManager();
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.content, new DishesFragment().newInstance(selectedDay,null)).commit();
+            }
+        });
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 }

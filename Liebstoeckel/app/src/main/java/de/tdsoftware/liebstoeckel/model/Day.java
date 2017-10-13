@@ -1,20 +1,20 @@
 package de.tdsoftware.liebstoeckel.model;
 
-import java.util.Date;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by erich on 11/10/17.
  */
 
-public class Day {
+public class Day implements Serializable {
 
     String weekday;
     String openingHours;
-    Date date;
+    String date;
     List<Dish> dishes;
 
-    public Day(String weekday, String openingHours, Date date, List<Dish> dishes) {
+    public Day(String weekday, String openingHours, String date, List<Dish> dishes) {
         this.weekday = weekday;
         this.openingHours = openingHours;
         this.date = date;
@@ -37,11 +37,11 @@ public class Day {
         this.openingHours = openingHours;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

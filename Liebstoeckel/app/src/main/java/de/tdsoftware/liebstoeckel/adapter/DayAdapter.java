@@ -64,15 +64,15 @@ public class DayAdapter extends BaseAdapter {
         Set date
          */
 
-        TextView textViewDate = (TextView) view.findViewById(R.id.textView_menu_date);
-        textViewDay.setText(day.getDate().toString());
+        TextView textViewDate = (TextView) view.findViewById(R.id.textView_dishes_date);
+        textViewDate.setText(day.getDate().toString());
 
         /*
         Set opening hours
          */
 
         TextView textViewOpeningHours = (TextView) view.findViewById(R.id.textView_menu_openingHours);
-        textViewDay.setText(day.getOpeningHours());
+        textViewOpeningHours.setText(day.getOpeningHours());
 
         return view;
     }

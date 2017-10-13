@@ -9,12 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import de.tdsoftware.liebstoeckel.R;
 import de.tdsoftware.liebstoeckel.adapter.DishesAdapter;
+import de.tdsoftware.liebstoeckel.model.Day;
 import de.tdsoftware.liebstoeckel.model.Dish;
 
 /**
@@ -28,11 +33,11 @@ import de.tdsoftware.liebstoeckel.model.Dish;
 public class DishesFragment extends android.support.v4.app.Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+    private static final Day ARG_PARAM1 = null;
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private Day day;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
@@ -53,10 +58,10 @@ public class DishesFragment extends android.support.v4.app.Fragment {
      * @return A new instance of fragment DayFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DishesFragment newInstance(String param1, String param2) {
+    public static DishesFragment newInstance(Day param1, String param2) {
         DishesFragment fragment = new DishesFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putSerializable("day", param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -66,7 +71,7 @@ public class DishesFragment extends android.support.v4.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            day = (Day) getArguments().getSerializable("day");
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -77,6 +82,28 @@ public class DishesFragment extends android.support.v4.app.Fragment {
 
         view = inflater.inflate(R.layout.fragment_dishes, container, false);
         listViewDishes = (ListView) view.findViewById(R.id.listView_dishes);
+
+        /*
+        Get the current day and the date and display it in a TextView. This is necessary in order to display the menu of the current day to the user
+         */
+
+        //get the current date
+        Calendar c = Calendar.getInstance();
+
+        //create formattedDate in order to display the day correctly
+        String weekDay;
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.GERMANY);
+        weekDay = dayFormat.format(c.getTime());
+        //display it in a TextView
+        TextView tvCurrentDay = (TextView) view.findViewById(R.id.textView_dishes_weekday);
+        tvCurrentDay.setText(weekDay);
+
+        //create formattedDate in order to display the date correctly
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        String today = dateFormat.format(c.getTime());
+        //set the date in a TextView
+        TextView tvToday = (TextView) view.findViewById(R.id.textView_dishes_date);
+        tvToday.setText(today);
 
         // Inflate the layout for this fragment
         return view;
@@ -157,6 +184,9 @@ public class DishesFragment extends android.support.v4.app.Fragment {
 
         DishesAdapter dishesAdapter = new DishesAdapter(this.getContext(), dishes);
 
+        /*
+        Standard adapter used for testing the list
+         */
         //ArrayAdapter<Dish> adapter = new ArrayAdapter<Dish>(this.getContext(), R.layout.support_simple_spinner_dropdown_item, dishes);
 
         listViewDishes.setAdapter(dishesAdapter);
