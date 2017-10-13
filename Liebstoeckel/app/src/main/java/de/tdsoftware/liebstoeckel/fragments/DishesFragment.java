@@ -83,27 +83,14 @@ public class DishesFragment extends android.support.v4.app.Fragment {
         view = inflater.inflate(R.layout.fragment_dishes, container, false);
         listViewDishes = (ListView) view.findViewById(R.id.listView_dishes);
 
-        /*
-        Get the current day and the date and display it in a TextView. This is necessary in order to display the menu of the current day to the user
-         */
 
-        //get the current date
-        Calendar c = Calendar.getInstance();
+        //display the day selected in a TextView
+        TextView tvDay = (TextView) view.findViewById(R.id.textView_dishes_weekday);
+        tvDay.setText(day.getWeekday());
 
-        //create formattedDate in order to display the day correctly
-        String weekDay;
-        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.GERMANY);
-        weekDay = dayFormat.format(c.getTime());
-        //display it in a TextView
-        TextView tvCurrentDay = (TextView) view.findViewById(R.id.textView_dishes_weekday);
-        tvCurrentDay.setText(weekDay);
-
-        //create formattedDate in order to display the date correctly
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        String today = dateFormat.format(c.getTime());
-        //set the date in a TextView
+        //display the date in a TextView
         TextView tvToday = (TextView) view.findViewById(R.id.textView_dishes_date);
-        tvToday.setText(today);
+        tvToday.setText(day.getDate());
 
         // Inflate the layout for this fragment
         return view;
@@ -166,23 +153,7 @@ public class DishesFragment extends android.support.v4.app.Fragment {
         At this step, the day's dishes should be known.
          */
 
-        /*
-        Fake dishes created in order to test the adpater
-         */
-
-        List<Dish> dishes = new ArrayList<>();
-
-        /*
-        Create and add the dishes to the list
-         */
-        Dish dish1 = new Dish("TAGESGERICHT FLEISCH/ FISCH", "Wolfsbarschfilet, dazu Quitten-Ingwer-Chutney, Kartoffel-Möhren-Püree, Spinat", "6,90€");
-        Dish dish2 = new Dish("TAGESGERICHT VEGETARISCH / FISCH", "Frischer Blumenkohl mit Zucchini, Kartoffelstampf und Sauce Hollandaise", "6,90€");
-        Dish dish3 = new Dish("TAGESSUPPE", "Linseneintopf mit rote Bete, Orange, Zucchini und Möhre", "3,90€");
-        dishes.add(dish1);
-        dishes.add(dish2);
-        dishes.add(dish3);
-
-        DishesAdapter dishesAdapter = new DishesAdapter(this.getContext(), dishes);
+        DishesAdapter dishesAdapter = new DishesAdapter(this.getContext(), day.getDishes());
 
         /*
         Standard adapter used for testing the list

@@ -18,6 +18,7 @@ import java.util.List;
 import de.tdsoftware.liebstoeckel.R;
 import de.tdsoftware.liebstoeckel.adapter.DayAdapter;
 import de.tdsoftware.liebstoeckel.model.Day;
+import de.tdsoftware.liebstoeckel.model.Dish;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -153,19 +154,19 @@ public class MenuFragment extends android.support.v4.app.Fragment implements Dis
          */
 
         String date = "16.10.17";
-        Day monday = new Day("Montag", "VON 07:30Uhr BIS 17:00Uhr", date, null);
+        Day monday = new Day("Montag", "VON 07:30Uhr BIS 17:00Uhr", date, getDishes());
         date = "17.10.17";
-        Day tuesday = new Day("Dienstag", "VON 07:30Uhr BIS 17:00Uhr", date, null);
+        Day tuesday = new Day("Dienstag", "VON 07:30Uhr BIS 17:00Uhr", date, getDishes());
          date = "18.10.17";
-        Day wednesday = new Day("Mittwoch", "VON 07:30Uhr BIS 17:00Uhr", date, null);
+        Day wednesday = new Day("Mittwoch", "VON 07:30Uhr BIS 17:00Uhr", date, getDishes());
         date = "19.10.17";
-        Day thursday = new Day("Donnerstag", "VON 07:30Uhr BIS 17:00Uhr", date, null);
+        Day thursday = new Day("Donnerstag", "VON 07:30Uhr BIS 17:00Uhr", date, getDishes());
         date = "20.10.17";
-        Day friday = new Day("Freitag", "VON 07:30Uhr BIS 17:00Uhr", date, null);
+        Day friday = new Day("Freitag", "VON 07:30Uhr BIS 17:00Uhr", date, getDishes());
         date = "21.10.17";
-        Day saturday = new Day("Samstag", "       Geschlossen       ", date, null);
+        Day saturday = new Day("Samstag", "       Geschlossen       ", date, getDishes());
         date = "22.10.17";
-        Day sunday = new Day("Sontag", "       Geschlossen       ", date, null);
+        Day sunday = new Day("Sontag", "       Geschlossen       ", date, getDishes());
         List<Day> daysList = new ArrayList<>();
         daysList.add(monday);
         daysList.add(tuesday);
@@ -206,5 +207,21 @@ public class MenuFragment extends android.support.v4.app.Fragment implements Dis
     @Override
     public void onStop() {
         super.onStop();
+    }
+
+
+    private List<Dish> getDishes(){
+        List<Dish> dishes = new ArrayList<>();
+
+        /*
+        Create and add the dishes to the list
+         */
+        Dish dish1 = new Dish("TAGESGERICHT FLEISCH/ FISCH", "Wolfsbarschfilet, dazu Quitten-Ingwer-Chutney, Kartoffel-Möhren-Püree, Spinat", "6,90€");
+        Dish dish2 = new Dish("TAGESGERICHT VEGETARISCH / FISCH", "Frischer Blumenkohl mit Zucchini, Kartoffelstampf und Sauce Hollandaise", "6,90€");
+        Dish dish3 = new Dish("TAGESSUPPE", "Linseneintopf mit rote Bete, Orange, Zucchini und Möhre", "3,90€");
+        dishes.add(dish1);
+        dishes.add(dish2);
+        dishes.add(dish3);
+        return dishes;
     }
 }
