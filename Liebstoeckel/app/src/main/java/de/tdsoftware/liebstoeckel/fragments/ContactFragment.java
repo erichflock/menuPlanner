@@ -81,7 +81,6 @@ public class ContactFragment extends android.support.v4.app.Fragment implements 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         /*
         Variable v created in order to be possible to set up the variable mapView
          */

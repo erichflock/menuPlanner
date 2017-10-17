@@ -1,13 +1,15 @@
 package de.tdsoftware.liebstoeckel.model;
 
+import java.io.Serializable;
+
 /**
  * Created by erich on 11/10/17.
  */
 
-public class Dish {
-    String name;
-    String ingredients;
-    String price;
+public class Dish implements Serializable{
+    private String name;
+    private String ingredients;
+    private String price;
 
     public Dish(String name, String ingredients, String price) {
         this.name = name;
@@ -27,15 +29,8 @@ public class Dish {
         return ingredients;
     }
 
-    public void setIngredients(String ingredients) {
-        this.ingredients = ingredients;
-    }
-
     public String getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
 }

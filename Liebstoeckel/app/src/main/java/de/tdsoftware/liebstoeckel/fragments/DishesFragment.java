@@ -1,26 +1,18 @@
 package de.tdsoftware.liebstoeckel.fragments;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
 
 import de.tdsoftware.liebstoeckel.R;
 import de.tdsoftware.liebstoeckel.adapter.DishesAdapter;
 import de.tdsoftware.liebstoeckel.model.Day;
-import de.tdsoftware.liebstoeckel.model.Dish;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,7 +25,6 @@ import de.tdsoftware.liebstoeckel.model.Dish;
 public class DishesFragment extends android.support.v4.app.Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final Day ARG_PARAM1 = null;
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
@@ -87,10 +78,6 @@ public class DishesFragment extends android.support.v4.app.Fragment {
         //display the day selected in a TextView
         TextView tvDay = (TextView) view.findViewById(R.id.textView_dishes_weekday);
         tvDay.setText(day.getWeekday());
-
-        //display the date in a TextView
-        TextView tvToday = (TextView) view.findViewById(R.id.textView_dishes_date);
-        tvToday.setText(day.getDate());
 
         // Inflate the layout for this fragment
         return view;

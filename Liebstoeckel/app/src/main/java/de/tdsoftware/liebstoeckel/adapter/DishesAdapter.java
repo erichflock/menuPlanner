@@ -53,27 +53,33 @@ public class DishesAdapter extends BaseAdapter {
         if(view == null)
             view = inflater.inflate(R.layout.item_dishes, parent, false);
 
-
         /*
-        Set the name of the dish. Usually this name is TAGESGERICHT FLEISCH/ FISCH, TAGESGERICHT VEGETARISCH / FISCH or TAGESSUPPE
+        If there is no ingredients, the dish won't be displayed
          */
 
-        TextView option = (TextView) view.findViewById(R.id.textView_dishes_option);
-        option.setText(dish.getName());
+        if(!dish.getIngredients().isEmpty()) {
 
-        /*
-        Set the ingredients of the dish
-         */
+            /*
+            Set the name of the dish. Usually this name is TAGESGERICHT FLEISCH/ FISCH, TAGESGERICHT VEGETARISCH / FISCH or TAGESSUPPE
+             */
 
-        TextView ingredients = (TextView) view.findViewById(R.id.textView_dishes_ingredients);
-        ingredients.setText(dish.getIngredients());
+            TextView option = (TextView) view.findViewById(R.id.textView_dishes_option);
+            option.setText(dish.getName());
 
-        /*
-        Set the price
-         */
+            /*
+            Set the ingredients of the dish
+             */
 
-        TextView price = (TextView) view.findViewById(R.id.textView_dishes_price);
-        price.setText(dish.getPrice());
+            TextView ingredients = (TextView) view.findViewById(R.id.textView_dishes_ingredients);
+            ingredients.setText(dish.getIngredients());
+
+            /*
+            Set the price
+            */
+
+            TextView price = (TextView) view.findViewById(R.id.textView_dishes_price);
+            price.setText(dish.getPrice());
+        }
 
         return view;
     }

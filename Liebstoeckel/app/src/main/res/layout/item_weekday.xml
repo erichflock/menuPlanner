@@ -14,23 +14,14 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/textView_dishes_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="16.10.17"
-        android:textSize="10dp"
-        android:layout_marginStart="39dp"
-        android:layout_alignStart="@+id/textView_menu_openingHours"
-        android:layout_alignTop="@+id/textView_menu_weekDay" />
-
-    <TextView
         android:id="@+id/textView_menu_openingHours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Von 07:30 bis 17:00 Uhr"
         android:textSize="10dp"
-        android:layout_marginEnd="12dp"
-        android:layout_below="@+id/textView_menu_weekDay"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignBaseline="@+id/textView_menu_weekDay"
+        android:layout_alignBottom="@+id/textView_menu_weekDay"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp" />
 
 </RelativeLayout>

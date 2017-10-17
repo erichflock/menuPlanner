@@ -61,13 +61,6 @@ public class DayAdapter extends BaseAdapter {
         textViewDay.setText(day.getWeekday());
 
         /*
-        Set date
-         */
-
-        TextView textViewDate = (TextView) view.findViewById(R.id.textView_dishes_date);
-        textViewDate.setText(day.getDate().toString());
-
-        /*
         Set opening hours
          */
 
