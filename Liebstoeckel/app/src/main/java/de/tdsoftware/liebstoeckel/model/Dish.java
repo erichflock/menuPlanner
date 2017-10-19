@@ -7,14 +7,21 @@ import java.io.Serializable;
  */
 
 public class Dish implements Serializable{
+
+    private long id;
     private String name;
     private String ingredients;
     private String price;
 
-    public Dish(String name, String ingredients, String price) {
+    public Dish(long id, String name, String ingredients, String price) {
+        this.id = id;
         this.name = name;
         this.ingredients = ingredients;
         this.price = price;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getName() {
@@ -31,6 +38,10 @@ public class Dish implements Serializable{
 
     public String getPrice() {
         return price;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
 }

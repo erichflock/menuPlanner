@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,11 @@ import de.tdsoftware.liebstoeckel.model.Week;
 public class LoadModelTask extends AsyncTask<Void, Void, Menu> {
 
     String page;
+
+    /*
+    IDs
+     */
+    long day_id = 0, dish_id = 0;
 
     private static final String ns = null;
 
@@ -56,6 +62,13 @@ public class LoadModelTask extends AsyncTask<Void, Void, Menu> {
 
     @Override
     protected Menu doInBackground(Void... params) {
+
+        /*
+        Check internet connection
+         */
+
+        if(!checkConnection())
+            return null;
 
         //contains the week period and the name of the dishes
         /*
@@ -101,7 +114,6 @@ public class LoadModelTask extends AsyncTask<Void, Void, Menu> {
         D/Element 27 :: GESCHLOSSEN
          */
         tds = getTag("td");
-
         String weekPeriod = ths.get(0).text();
         Week week = new Week(weekPeriod, createDays());
         Menu menu = new Menu(week);
@@ -183,7 +195,8 @@ public class LoadModelTask extends AsyncTask<Void, Void, Menu> {
     }
 
     private Dish createDish(int indexTH, int indexTD){
-        return new Dish(ths.get(indexTH).text(), extractIngredients(tds.get(indexTD).text()), extractPrice(tds.get(indexTD).text()));
+        dish_id++;
+        return new Dish(dish_id, ths.get(indexTH).text(), extractIngredients(tds.get(indexTD).text()), extractPrice(tds.get(indexTD).text()));
     }
 
     /*
@@ -203,11 +216,28 @@ public class LoadModelTask extends AsyncTask<Void, Void, Menu> {
                 dishes.add(createDish(l,i+l));
             }
             /*
-            Create a day and add it to a list
+            Create a day and add it to a list. If the restaurant is closed, the day won't be added to the list
              */
-            Day day = new Day(extractWeekDay(tds.get(i).text()), extractOpeningHours(tds.get(i).text()), dishes);
-            days.add(day);
+            day_id++;
+            Day day = new Day(day_id,extractWeekDay(tds.get(i).text()), extractOpeningHours(tds.get(i).text()), dishes);
+            if(!day.getOpeningHours().toUpperCase().equals("GESCHLOSSEN"))
+                days.add(day);
         }
         return days;
+    }
+
+    private boolean checkConnection(){
+        try {
+            Document document = Jsoup.connect(page).get();
+            if(document.hasText()){
+                Log.d("Internet Connection", "OK");
+                return true;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.d("Internet Connection", "NO");
+        return false;
     }
 }

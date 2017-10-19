@@ -158,14 +158,11 @@ public class MenuFragment extends android.support.v4.app.Fragment implements Dis
             public void onItemClick(AdapterView<?> list, View view, int position, long id) {
                 /*
                 At this point, it's important to send the day object to the dishes fragment.
-                If the restaurant is closed, the dishes fragment won't be called
-                 */
+                */
                 Day selectedDay = (Day) list.getItemAtPosition(position);
-                if(!selectedDay.getOpeningHours().toUpperCase().equals("GESCHLOSSEN")) {
                     fragmentManager = getActivity().getSupportFragmentManager();
                     transaction = fragmentManager.beginTransaction();
                     transaction.replace(R.id.content, new DishesFragment().newInstance(selectedDay, null)).commit();
-                }
             }
         });
     }

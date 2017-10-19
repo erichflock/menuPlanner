@@ -9,11 +9,14 @@ import java.util.List;
 
 public class Day implements Serializable {
 
+    private long id;
     private String weekday;
     private String openingHours;
     private List<Dish> dishes;
 
-    public Day(String weekday, String openingHours, List<Dish> dishes) {
+    public Day(long id, String weekday, String openingHours, List<Dish> dishes) {
+
+        this.id = id;
         this.weekday = weekday.toUpperCase();
         this.openingHours = openingHours;
         this.dishes = dishes;
@@ -21,6 +24,10 @@ public class Day implements Serializable {
 
     public String getWeekday() {
         return weekday;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getOpeningHours() {
@@ -31,4 +38,7 @@ public class Day implements Serializable {
         return dishes;
     }
 
+    public void setDishes(List<Dish> dishes) {
+        this.dishes = dishes;
+    }
 }

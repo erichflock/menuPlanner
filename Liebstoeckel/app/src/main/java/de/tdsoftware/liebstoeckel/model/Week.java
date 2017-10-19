@@ -21,6 +21,10 @@ public class Week implements Serializable {
         return days;
     }
 
+    public String getPeriod() {
+        return period;
+    }
+
     public Day getDay(String weekday){
 
         for (Day day:
@@ -31,4 +35,5 @@ public class Week implements Serializable {
         }
         return null;
     }
+
 }
