@@ -155,6 +155,11 @@ public class LoadModelTask extends AsyncTask<Void, Void, Menu> {
 
         String[] strings = text.split(" ");
 
+        //chang SONNABEND to SAMSTAG
+
+        if(strings[0].equals("SONNABEND"))
+            strings[0] = "SAMSTAG";
+
         return strings[0];
     }
 

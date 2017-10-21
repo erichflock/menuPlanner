@@ -129,8 +129,22 @@ public class MainActivity extends AppCompatActivity implements ContactFragment.O
     }
 
     private void startDishFragment() {
+        String weekday = getCurrentDay();
+
+        //if the day is null (restaurant not opened), the day displayed will the first day of the week that the restaurant was opened
+
+        if(menu.getWeek().getDay(weekday) == null){
+            for (Day day:
+                 menu.getWeek().getDays()) {
+                if(day != null) {
+                    weekday = day.getWeekday();
+                    break;
+                }
+            }
+        }
+
         transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.content, new DishesFragment().newInstance(menu.getWeek().getDay(getCurrentDay()), null)).commit();
+        transaction.replace(R.id.content, new DishesFragment().newInstance(menu.getWeek().getDay(weekday), null)).commit();
     }
 
     @Override
