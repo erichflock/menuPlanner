@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import de.tdsoftware.liebstoeckel.R;
 import de.tdsoftware.liebstoeckel.adapter.DayAdapter;
@@ -83,7 +84,10 @@ public class MenuFragment extends android.support.v4.app.Fragment implements Dis
 
         view = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        listViewWeekDays = (ListView) view.findViewById(R.id.listView_weekDay);
+        TextView weekPeriod = (TextView) view.findViewById(R.id.textView_menu_week);
+        weekPeriod.setText(week.getPeriod());
+
+        listViewWeekDays = (ListView) view.findViewById(R.id.listView_menu_weekDay);
 
         // Inflate the layout for this fragment
         return view;

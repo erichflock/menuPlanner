@@ -25,7 +25,7 @@
             />
 
         <TextView
-            android:id="@+id/textView_week"
+            android:id="@+id/textView_menu_week"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/textView_menu"
@@ -36,7 +36,7 @@
             android:text="@string/week" />
 
         <ListView
-            android:id="@+id/listView_weekDay"
+            android:id="@+id/listView_menu_weekDay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
